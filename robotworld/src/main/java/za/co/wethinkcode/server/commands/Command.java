@@ -56,6 +56,14 @@ public abstract class Command {
         switch (args[0]){
             case "shutdown":
                 return new ShutdownCommand();
+            case "forward":
+                return new ForwardCommand(args[1]);
+            case "back":
+                return new BackCommand(args[1]);
+            case "left":
+                return new LeftCommand();
+            case "right":
+                return new RightCommand();
             default:
                 throw new IllegalArgumentException("Unsupported command: " + instruction);
         }
