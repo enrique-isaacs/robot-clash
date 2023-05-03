@@ -1,43 +1,33 @@
 package za.co.wethinkcode.server.robotLab;
 
 import za.co.wethinkcode.server.commands.Command;
-import za.co.wethinkcode.server.maze.DefaultMaze;
-import za.co.wethinkcode.server.world.IWorld;
-import za.co.wethinkcode.server.world.dummyWorld;
 
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractBot {
 
-    private String status;
-    private String name;
+    private String status; //operational mode , eg. NORMAL
+    private static int visibility;
+    private static int shields;
+    private String botName;
 
-    private IWorld world;
 
 
-    public AbstractBot(String name) {
-        this.name = name;
-        this.status = "Ready";
-        this.world = new dummyWorld(new DefaultMaze());
+    public AbstractBot(String name, int visibilityX, int shieldsX) {
+        this.botName = name;
+        this.status = "NORMAL";
+        this.visibility = visibilityX;
+        this.shields = shieldsX;
     }
 
-    public AbstractBot(String name, IWorld world){
-        this.name = name;
-        this.status = "Ready";
-        this.world = world;
-    }
-
-    public IWorld getWorld(){
-        return this.world;
-    }
 
     public String getStatus() {
         return this.status;
     }
 
     public String getRobotName(){
-        return this.name;
+        return this.botName;
     }
 
     public boolean handleCommand(Command command) {
@@ -45,18 +35,24 @@ public abstract class AbstractBot {
     }
 
 
-    @Override
-    public String toString() {
-        return "[" + this.getWorld().getPosition().getX() + "," + this.getWorld().getPosition().getY() + "] "
-                + this.name + "> " + this.status;
-    }
-
-
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public static AbstractBot make(String model, String name){
+        switch(model){
+            case "Sniper":
+                return new SniperBot(name, visibility, shields);
+            default:
+                return new BasicBot(name, visibility, shields);
+                // make bot classes
+        }
     }
+
+    // update position method
+    // update direction
+    // get direction
+    // get current position
+
+    // make edits to Abstract Robot class
 }
