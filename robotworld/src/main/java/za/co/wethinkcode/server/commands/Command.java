@@ -1,7 +1,6 @@
 package za.co.wethinkcode.server.commands;
 
 import za.co.wethinkcode.server.robotLab.AbstractBot;
-import za.co.wethinkcode.server.world.IWorld;
 
 import java.util.ArrayList;
 import java.util.Arrays;

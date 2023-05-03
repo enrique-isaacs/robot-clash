@@ -1,14 +1,10 @@
 package za.co.wethinkcode.server.serverInterface;
 
-import za.co.wethinkcode.server.commands.Command;
 import za.co.wethinkcode.server.world.WORLD;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.ServerSocket;
-import java.util.Scanner;
 
 
 public class Server {
@@ -24,13 +20,12 @@ public class Server {
 
     public void start() throws IOException {
 
-       
-       
+        WorldCommands consoleCommands = new WorldCommands(this.world, serverSocket);
+        consoleCommands.start();
 
         while(true){
             Socket socket = serverSocket.accept();
             System.out.println("Client connected: " + socket);
-            updateGame(shouldContinue, robot);
 
             ClientHandler clientHandler = new ClientHandler(socket);
             clientHandler.start();

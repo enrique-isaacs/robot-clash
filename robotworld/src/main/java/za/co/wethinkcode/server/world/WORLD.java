@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ArrayList;
-import za.co.wethinkcode.server_side.robot_lab.AbstractBot.java;
+import za.co.wethinkcode.server.robotLab.AbstractBot;
 
 
 public class WORLD {
@@ -30,9 +30,9 @@ public class WORLD {
 
     private Integer[] getWorldConfigs(){
 
-    int height = Integer.parseInt(ReadDataFromJSONFile.get("height"));
-    int width = Integer.parseInt(ReadDataFromJSONFile.get("width"));
-    int visibility = Integer.parseInt(ReadDataFromJSONFile.get("visibility"));
+    int height = Integer.parseInt(ReadJSONFile.get("height"));
+    int width = Integer.parseInt(ReadJSONFile.get("width"));
+    int visibility = Integer.parseInt(ReadJSONFile.get("visibility"));
     
     Integer[] worldConfigs = {height, width, visibility};
     return worldConfigs;
@@ -41,11 +41,11 @@ public class WORLD {
 
     public static void addRobots(String type, String name){
         // add robots to list
-        listOfRobots.add(Bots.make(type, name));
+        listOfRobots.add(AbstractBot.make(type, name));
 
     }
 
-    public ArrayList<Bots> getRobots(){
+    public ArrayList<AbstractBot> getRobots(){
         return listOfRobots;
     }
 

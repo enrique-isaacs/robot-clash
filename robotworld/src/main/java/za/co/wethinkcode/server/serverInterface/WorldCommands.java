@@ -1,4 +1,4 @@
-package za.co.wethinkcode.server.server_interface;
+package za.co.wethinkcode.server.serverInterface;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,15 +6,15 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.net.ServerSocket;
 
-import za.co.wethinkcode.server.robot_lab.AbstractBots;
+import za.co.wethinkcode.server.robotLab.AbstractBot;
 import za.co.wethinkcode.server.world.WORLD;
 
-public class ConsoleCommands extends Thread{
+public class WorldCommands extends Thread{
 
-    CPT19WORLD world;
+    WORLD world;
     private ServerSocket socket;
 
-    public ConsoleCommands(CPT19WORLD world, ServerSocket socket){
+    public WorldCommands(WORLD world, ServerSocket socket){
 
         this.world = world;
         this.socket = socket;
@@ -71,12 +71,12 @@ public class ConsoleCommands extends Thread{
 
     private boolean listRobots(){
 
-        if this.world.getRobots().size() > 0 {
+        if (this.world.getRobots().size() > 0) {
 
             System.out.println("Robots in the world:");
         
             for(AbstractBot robot: this.world.getRobots()){
-                System.out.println(robot.getName() + " : " + robot.getStatus());
+                System.out.println(robot.getRobotName() + " : " + robot.getStatus());
             }
             return true;
         }

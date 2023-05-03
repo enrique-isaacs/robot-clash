@@ -1,9 +1,6 @@
 package za.co.wethinkcode.server.robotLab;
 
 import za.co.wethinkcode.server.commands.Command;
-import za.co.wethinkcode.server.maze.DefaultMaze;
-import za.co.wethinkcode.server.world.IWorld;
-import za.co.wethinkcode.server.world.dummyWorld;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,10 +15,10 @@ public abstract class AbstractBot {
 
 
     public AbstractBot(String name, int visibilityX, int shieldsX) {
-        this.name = name;
+        this.botName = name;
         this.status = "NORMAL";
         this.visibility = visibilityX;
-        this.shieldsX = shieldsX;
+        this.shields = shieldsX;
     }
 
 
@@ -30,7 +27,7 @@ public abstract class AbstractBot {
     }
 
     public String getRobotName(){
-        return this.name;
+        return this.botName;
     }
 
     public boolean handleCommand(Command command) {
@@ -42,10 +39,20 @@ public abstract class AbstractBot {
         this.status = status;
     }
 
-
-    public String getName() {
-        return name;
+    public static AbstractBot make(String model, String name){
+        switch(model){
+            case "Sniper":
+                return new SniperBot(name, visibility, shields);
+            default:
+                return new BasicBot(name, visibility, shields);
+                // make bot classes
+        }
     }
+
+    // update position method
+    // update direction
+    // get direction
+    // get current position
 
     // make edits to Abstract Robot class
 }

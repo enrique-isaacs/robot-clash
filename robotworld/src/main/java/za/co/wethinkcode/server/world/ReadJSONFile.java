@@ -1,4 +1,4 @@
-package za.co.wethinkcode.server_side.JSONHelper;
+package za.co.wethinkcode.server.world;
 
 import java.io.FileReader;
 
