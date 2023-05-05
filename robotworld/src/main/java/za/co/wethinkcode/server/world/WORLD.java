@@ -42,9 +42,7 @@ public class WORLD {
     public Position getTOPLEFT(){
         return this.TOPLEFT;
     }
-    public Position getBOTTOMRIGHT(){
-        return this.BOTTOMRIGHT;
-    }
+    public Position getBOTTOMRIGHT(){ return this.BOTTOMRIGHT;}
 
     public static void addRobots(String type, String name){
         // add robots to list
