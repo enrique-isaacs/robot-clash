@@ -26,6 +26,8 @@ class ClientHandler extends Thread {
 
                 if (message.equals("quit")) {
                     break;
+                } else if (message.equals("dump")) {
+
                 }
 
                 Scanner scn = new Scanner(System.in);
