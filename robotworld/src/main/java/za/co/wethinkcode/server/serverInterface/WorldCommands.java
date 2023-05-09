@@ -32,7 +32,7 @@ public class WorldCommands extends Thread{
                 System.out.println("Enter command: ");
                 input = consoleReader.readLine();
                 while(!Arrays.asList(validArgs).contains(input.toLowerCase())){
-                    System.out.print("Invalid command. Enter command: ");
+                    System.out.println("Invalid command. Enter command: ");
                     input = consoleReader.readLine();
                 }
                 shouldContinue = manageWorld(input);

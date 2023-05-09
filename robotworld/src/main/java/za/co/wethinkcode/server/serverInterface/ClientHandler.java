@@ -1,9 +1,15 @@
 package za.co.wethinkcode.server.serverInterface;
 
+import za.co.wethinkcode.client.ClientCommand;
+import za.co.wethinkcode.server.world.WORLD;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 class ClientHandler extends Thread {
@@ -20,13 +26,26 @@ class ClientHandler extends Thread {
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             String message = null;
+
             while (true) {
                 message = (String) inputStream.readObject();
+                RequestHandler r = new RequestHandler(message);
+                String cmd = r.getCommand();
+                // temp fix to add robots to list of robots
+//                List<String> arguments = parseArguments(message);
+
+                if(cmd.contains("launch")){
+                    WORLD.addRobots(r.getCommand(),r.getName());
+                }
+
                 System.out.println("Received message from client: " + message);
 
-                if (message.equals("quit")) {
+                // this is where the commands should be handled
+
+                if (r.getCommand().equalsIgnoreCase("quit")) {
+
                     break;
-                } else if (message.equals("dump")) {
+                } else if (r.getCommand().equalsIgnoreCase("dump")) {
 
                 }
 
@@ -45,4 +64,13 @@ class ClientHandler extends Thread {
             e.printStackTrace();
         }
     }
+
+//    public static boolean isIN(String word, String[] args){
+//        for(String arg : args){
+//            if(arg.equalsIgnoreCase(word)){
+//                return true;
+//            }
+//        }return false;
+//    }
+
 }
