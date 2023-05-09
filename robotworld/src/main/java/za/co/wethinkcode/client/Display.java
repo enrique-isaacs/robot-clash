@@ -1,25 +1,29 @@
 package za.co.wethinkcode.client;
 
+import org.json.JSONObject;
+
 public class Display {
+    public static void main(String[] args) {
+        String jsonResponse = "{\n" +
+                "        \"result\": \"ERROR\",\n" +
+                "        \"data\": {\n" +
+                "        \"message\": \"No more space in this world\"\n" +
+                "        }\n" +
+                "        }";
 
-    public void showResponse(ResponseHandler responseHandler) {
-        String state = responseHandler.getState();
-        String message = responseHandler.getData();
+        JSONObject json = new JSONObject(jsonResponse);
+        String message = json.getJSONObject("data").getString("message");
 
-        String[] stateParts = state.split(" ");
-        String position = stateParts[0];
-        String steps = stateParts[1];
-
-        String action = "unknown";
-        if (responseHandler instanceof ForwardResult) {
-            action = "forward";
-        } else if (responseHandler instanceof BackResult) {
-            action = "back";
+        String userName = null;
+        try {
+            ClientCommand client = new ClientCommand("localhost", 1999); // replace with your server host and port
+            JSONObject command = client.getCommand();
+            userName = command.getString("name");
+            client.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        String formattedMessage = String.format("[%s] name moved %s by %s steps", position, action, steps);
-
-        // Display the message to the console
-        System.out.println(formattedMessage);
+        System.out.println(userName + " : " + message);
     }
 }
