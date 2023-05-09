@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="javafx">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Downloads/openjfx-20.0.1-javadoc/javafx-20.0.1-javadoc/javafx.base" />
+      <root url="file://$PROJECT_DIR$/../Downloads/openjfx-20.0.1-javadoc/javafx-20.0.1-javadoc/javafx.controls" />
+      <root url="file://$PROJECT_DIR$/../Downloads/openjfx-20.0.1-javadoc/javafx-20.0.1-javadoc/javafx.fxml" />
+      <root url="file://$PROJECT_DIR$/../Downloads/openjfx-20.0.1-javadoc/javafx-20.0.1-javadoc/javafx.graphics" />
+      <root url="file://$PROJECT_DIR$/../Downloads/openjfx-20.0.1-javadoc/javafx-20.0.1-javadoc/javafx.media" />
+      <root url="file://$PROJECT_DIR$/../Downloads/openjfx-20.0.1-javadoc/javafx-20.0.1-javadoc/javafx.swing" />
+      <root url="file://$PROJECT_DIR$/../Downloads/openjfx-20.0.1-javadoc/javafx-20.0.1-javadoc/javafx.web" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
