@@ -5,12 +5,13 @@ import com.google.gson.JsonObject;
 
 import java.io.ObjectInputStream;
 
-public class BackResult extends ResponseHandler{
+public class LookResult extends ResponseHandler{
 
     private JsonObject response;
     private JsonElement data, state;
 
-    public BackResult(ObjectInputStream inputStream, String userCommand){
+    public LookResult(ObjectInputStream inputStream, String userCommand){
+
         super(inputStream, userCommand);
     }
 
@@ -20,6 +21,11 @@ public class BackResult extends ResponseHandler{
         JsonObject dataObject = data.getAsJsonObject();
         return dataObject.get("message").getAsString();
     }
+
+//    @Override
+//    public String[] getObjects() {
+//        // TODO
+//    }
 
     @Override
     public String getState() {

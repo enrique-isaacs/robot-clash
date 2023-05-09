@@ -66,7 +66,7 @@ public class ClientCommand {
     }
 
     public static void main(String[] args) throws IOException {
-        int serverPort = 1999;
+        int serverPort = 8888;
         String serverHost = "10.200.108.107";
 
         ClientCommand client = new ClientCommand(serverHost, serverPort);

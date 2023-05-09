@@ -5,12 +5,13 @@ import com.google.gson.JsonObject;
 
 import java.io.ObjectInputStream;
 
-public class BackResult extends ResponseHandler{
+public class TurnResult extends ResponseHandler{
 
     private JsonObject response;
     private JsonElement data, state;
 
-    public BackResult(ObjectInputStream inputStream, String userCommand){
+    public TurnResult(ObjectInputStream inputStream, String userCommand){
+
         super(inputStream, userCommand);
     }
 

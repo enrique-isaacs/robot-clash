@@ -10,7 +10,6 @@ import java.util.Arrays;
 public class ForwardResult extends ResponseHandler{
 
     private JsonObject response;
-
     private JsonElement data, state;
 
     public ForwardResult(ObjectInputStream inputStream, String userCommand){
@@ -36,6 +35,5 @@ public class ForwardResult extends ResponseHandler{
 
         return position + " " + status + " " + direction;
     }
-
 }
 

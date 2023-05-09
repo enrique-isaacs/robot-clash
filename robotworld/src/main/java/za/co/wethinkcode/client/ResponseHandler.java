@@ -32,8 +32,8 @@ public abstract class ResponseHandler {
                     return new ForwardResult(this.inputStream, this.userCommand);
                 case "back":
                    return new BackResult(this.inputStream, this.userCommand);
-//                case "left":
-//                    return new BackResult(this.inputStream, this.userCommand);
+                case "turn":
+                    return new TurnResult(this.inputStream, this.userCommand);
 //                case "right":
 //                    return new BackResult(this.inputStream, this.userCommand);
             }
