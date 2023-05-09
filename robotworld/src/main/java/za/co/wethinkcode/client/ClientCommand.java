@@ -40,12 +40,14 @@ public class ClientCommand {
         socket.close();
     }
 
-    public JSONObject getCommand() {
+    public JSONObject getCommand(String name) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter your name: ");
-        String name = scanner.nextLine().trim();
-
+        System.out.println("I can understand these commands:\n" +
+                "QUIT  - Shut down robot\n" +
+                "FORWARD - move forward by specified number of steps, e.g. 'FORWARD 10'\n"+
+                "BACKWARD - move backward by specified number of steps, e.g. 'BACK 10'\n" +
+                "LOOK - Look whats around you 'look'");
         System.out.print("Enter a command and argument (e.g. 'forward 10' or 'launch sniper'): ");
         String userInput = scanner.nextLine().trim();
 
@@ -56,7 +58,10 @@ public class ClientCommand {
         jsonMap.put("robot", name);
         jsonMap.put("command", command);
 
-        if (command.equals("launch")) {
+        if (command.equals("quit")) {
+            ArrayList<Object> arguments = new ArrayList<Object>();
+            jsonMap.put("arguments", arguments);
+        } else if (command.equals("launch")) {
             if (parts.length < 2) {
                 System.out.println("Invalid command. Please specify the kind of robot to launch (sniper, basic, tank).");
                 return null;
@@ -85,35 +90,28 @@ public class ClientCommand {
 
             ArrayList<Object> arguments = new ArrayList<Object>();
             arguments.add(kind);
-//            arguments.add("maximum shield strength");
             arguments.add(maxShields);
-//            arguments.add("maximum shots");
             arguments.add(maxShots);
-
-//            jsonMap.put("kind", kind);
-//            jsonMap.put("maximum shield strength", maxShields);
-//            jsonMap.put("maximum shots", maxShots);
             jsonMap.put("arguments", arguments);
-        }else if(command.equals("look")){
+        } else if (command.equals("look")) {
             ArrayList<Object> arguments = new ArrayList<Object>();
             jsonMap.put("arguments", arguments);
 
-        }else if(command.equals("state")){
+        } else if (command.equals("state")) {
             ArrayList<Object> arguments = new ArrayList<Object>();
             jsonMap.put("arguments", arguments);
 
-        }else if(command.equals("reload")){
+        } else if (command.equals("reload")) {
             ArrayList<Object> arguments = new ArrayList<Object>();
             jsonMap.put("arguments", arguments);
 
-        }else if(command.equals("repair")){
+        } else if (command.equals("repair")) {
             ArrayList<Object> arguments = new ArrayList<Object>();
             jsonMap.put("arguments", arguments);
 
-        }else if(command.equals("fire")){
+        } else if (command.equals("fire")) {
             ArrayList<Object> arguments = new ArrayList<Object>();
             jsonMap.put("arguments", arguments);
-
         } else {
             ArrayList<String> arguments = new ArrayList<String>();
             for (int i = 1; i < parts.length; i++) {
@@ -138,14 +136,45 @@ public class ClientCommand {
 
         ClientCommand client = new ClientCommand(serverHost, serverPort);
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine().trim();
+
         while (true) {
-            JSONObject json = client.getCommand();
-            client.sendCommand(json);
-            if (json.getString("command").equals("launch")) {
+            JSONObject json = client.getCommand(name);
+            if (json != null) {
+                String command = json.getString("command");
+                if (command.equals("quit")) {
+                    System.out.println("GoodBytes");
+                    break;
+                }
+                client.sendCommand(json);
+            } else {
+                break;
+            }
+            System.out.println();
+        }
+
+        // Keep asking for input after sending information to the server
+        while (true) {
+            System.out.println();
+            System.out.println("Enter a new command or 'quit' to exit: ");
+            String userInput = scanner.nextLine().trim();
+
+            JSONObject json = client.getCommand(name);
+            if (json != null) {
+                String command = json.getString("command");
+                if (command.equals("quit")) {
+                    System.out.println("GoodBytes");
+                    break;
+                }
+                client.sendCommand(json);
+            } else {
                 break;
             }
         }
 
+        scanner.close();
         client.close();
     }
 }
