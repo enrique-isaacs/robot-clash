@@ -29,10 +29,10 @@ public class WorldCommands extends Thread{
         boolean shouldContinue = true;
         while (shouldContinue) {
             try {
-                System.out.print("Enter command: ");
+                System.out.println("Enter command: ");
                 input = consoleReader.readLine();
                 while(!Arrays.asList(validArgs).contains(input.toLowerCase())){
-                    System.out.print("Invalid command. Enter command: ");
+                    System.out.println("Invalid command. Enter command: ");
                     input = consoleReader.readLine();
                 }
                 shouldContinue = manageWorld(input);
@@ -90,6 +90,10 @@ public class WorldCommands extends Thread{
 
 
     private boolean dump(){
+        System.out.println("the world consists of:");
+        for(AbstractBot robot: this.world.getRobots()){
+            System.out.println(robot.getCurrentPosition() + " : " + robot.getRobotName());
+        }
         return true;
     }
 

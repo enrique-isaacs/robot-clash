@@ -2,7 +2,9 @@ package za.co.wethinkcode.server.robotLab;
 
 import za.co.wethinkcode.server.commands.Command;
 import za.co.wethinkcode.server.world.Direction;
+import za.co.wethinkcode.server.world.Obstacle;
 import za.co.wethinkcode.server.world.Position;
+import za.co.wethinkcode.server.world.WORLD;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +18,16 @@ public abstract class AbstractBot {
     private Direction currentDirection;
     private Position currentPosition;
     private static Position spawn;
+
+    public WORLD world;
+
+    private UpdateResponse response;
+
+    enum UpdateResponse {
+        SUCCESS,
+        OBSTRUCTED,
+        OUTSIDE_WORLD
+    }
 
     public AbstractBot(String name, int visibilityX, int shieldsX, Position spawnx) {
         this.botName = name;
@@ -55,26 +67,36 @@ public abstract class AbstractBot {
         }
     }
 
-//    public UpdateResponse updatePosition(int nrSteps){
-//        int newX = this.currentPosition.getX();
-//        int newY = this.currentPosition.getY();
-//
-//        if (Direction.UP.equals(this.currentDirection)) {
-//            newY = newY + nrSteps;
-//        }
-//        else if (Direction.DOWN.equals(this.currentDirection)) {
-//            newY = newY - nrSteps;
-//        }
-//        else if (Direction.LEFT.equals(this.currentDirection)) {
-//            newX = newX - nrSteps;
-//        }
-//        else if (Direction.RIGHT.equals(this.currentDirection)) {
-//            newX = newX + nrSteps;
-//        }
-//
-//        Position newPosition = new Position(newX, newY);
-//        return this.response;
-//    }
+    public UpdateResponse updatePosition(int nrSteps){
+        int newX = this.currentPosition.getX();
+        int newY = this.currentPosition.getY();
+
+        if (Direction.UP.equals(this.currentDirection)) {
+            newY = newY + nrSteps;
+        }
+        else if (Direction.DOWN.equals(this.currentDirection)) {
+            newY = newY - nrSteps;
+        }
+        else if (Direction.LEFT.equals(this.currentDirection)) {
+            newX = newX - nrSteps;
+        }
+        else if (Direction.RIGHT.equals(this.currentDirection)) {
+            newX = newX + nrSteps;
+        }
+
+        Position newPosition = new Position(newX, newY);
+
+        if (newPosition.isIn(world.getTOPLEFT(),world.getBOTTOMRIGHT())){
+            for(Obstacle ob : world.getObstacles()){
+                if(ob.blocksPath(currentPosition,newPosition)|| ob.blocksPosition(newPosition)){
+                    response = UpdateResponse.OBSTRUCTED;
+                }
+            }
+            response = UpdateResponse.SUCCESS;
+        }
+        else{response = UpdateResponse.OUTSIDE_WORLD;}
+        return response;
+    }
 
     public void updateDirection(boolean turnRight) {
         if (turnRight) {

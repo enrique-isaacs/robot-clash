@@ -39,10 +39,19 @@ public class WORLD {
     
     }
 
+    public Position getTOPLEFT(){
+        return this.TOPLEFT;
+    }
+    public Position getBOTTOMRIGHT(){ return this.BOTTOMRIGHT;}
+
     public static void addRobots(String type, String name){
         // add robots to list
         listOfRobots.add(AbstractBot.make(type, name));
 
+    }
+
+    public ArrayList<Obstacle> getObstacles(){
+        return listOfObstacles;
     }
 
     public ArrayList<AbstractBot> getRobots(){
