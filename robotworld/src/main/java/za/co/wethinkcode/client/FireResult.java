@@ -5,12 +5,12 @@ import com.google.gson.JsonObject;
 
 import java.io.ObjectInputStream;
 
-public class TurnResult extends ResponseHandler{
+public class FireResult extends ResponseHandler{
 
     private JsonObject response;
-    private JsonElement data, state;
+    private JsonElement data, state, objects;
 
-    public TurnResult(ObjectInputStream inputStream, String userCommand){
+    public FireResult(ObjectInputStream inputStream, String userCommand){
 
         super(inputStream, userCommand);
     }
@@ -20,7 +20,11 @@ public class TurnResult extends ResponseHandler{
         data = response.get("data");
         JsonObject dataObject = data.getAsJsonObject();
 
-        return dataObject.get("message").getAsString();
+        String message = dataObject.get("message").getAsString();
+        String distance = dataObject.get("distance").getAsString();
+        String robot = dataObject.get("robot").getAsString();
+
+        return message + " " + distance + " " + robot;
     }
 
     @Override
@@ -28,10 +32,8 @@ public class TurnResult extends ResponseHandler{
         state = response.get("state");
 
         JsonObject stateObject = state.getAsJsonObject();
-        String position = stateObject.get("position").getAsString();
-        String status = stateObject.get("status").getAsString();
-        String direction = stateObject.get("direction").getAsString();
+        String shots = stateObject.get("shots").getAsString();
 
-        return position + " " + status + " " + direction;
+        return shots;
     }
 }

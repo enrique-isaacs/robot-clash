@@ -2,14 +2,17 @@ package za.co.wethinkcode.client;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 import com.google.gson.*;
 import za.co.wethinkcode.server.commands.ShutdownCommand;
 
 public abstract class ResponseHandler {
 
     private String result, data, shields ,jsonRequest, userCommand, state;
+    private ArrayList<String> objects;
     private int[] position;
-    private int visibility, reload, repair;
+    private int visibility, reload, repair, shots;
     private ObjectInputStream inputStream;
     private JsonObject response;
 
@@ -53,6 +56,8 @@ public abstract class ResponseHandler {
     public int getReload() {return reload;}
 
     public int getRepair() {return repair;}
+
+    public ArrayList<String> getObjects() {return objects;};
 
     public String getState() {return state;}
 

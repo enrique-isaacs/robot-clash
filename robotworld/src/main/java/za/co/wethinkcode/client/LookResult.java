@@ -1,14 +1,20 @@
 package za.co.wethinkcode.client;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+
 
 public class LookResult extends ResponseHandler{
 
     private JsonObject response;
-    private JsonElement data, state;
+    private JsonElement data, state, objects;
 
     public LookResult(ObjectInputStream inputStream, String userCommand){
 
@@ -22,10 +28,26 @@ public class LookResult extends ResponseHandler{
         return dataObject.get("message").getAsString();
     }
 
-//    @Override
-//    public String[] getObjects() {
-//        // TODO
-//    }
+    @Override
+    public ArrayList<String> getObjects() {
+        objects = response.get("objects");
+
+//        JsonArray stateObject = objects.getAsJsonArray();
+//        ArrayList<String> object = new ArrayList<>();
+//
+//        Map<String, String> objectMap = new LinkedHashMap<>();
+//
+//        for (int i= 0; i < stateObject.size(); i++){
+//
+//
+//        }
+//
+//        String direction = stateObject.get("direction").getAsString();
+//        String type = stateObject.get("type").getAsString();
+//        String distance = stateObject.get("distance").getAsString();
+
+        return new ArrayList<>();
+    }
 
     @Override
     public String getState() {
