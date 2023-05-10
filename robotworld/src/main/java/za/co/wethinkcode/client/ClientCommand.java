@@ -11,6 +11,9 @@ import java.util.Scanner;
 import org.json.JSONObject;
 
 public class ClientCommand {
+
+    static int serverPort;
+    static String serverHost;
     private Socket socket;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
@@ -26,11 +29,14 @@ public class ClientCommand {
         outputStream.flush();
 
         String response = null;
+
         try {
             response = (String) inputStream.readObject();
             Display display = new Display();
-            ResponseHandler responseHandler = ResponseHandlerFactory.fromJson(response);
-            display.showResponse(responseHandler);
+            JSONObject jsonResponse = new JSONObject(response);
+            ResponseHandler responseHandler;
+//                responseHandler = ResponseHandler(jsonResponse);
+//                display.showResponse(responseHandler);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -133,8 +139,17 @@ public class ClientCommand {
     }
 
     public static void main(String[] args) throws IOException {
-        int serverPort = 8888;
-        String serverHost = "10.200.108.210";
+
+        if(args.length > 0){
+            serverPort = Integer.parseInt(args[0]);
+            serverHost = args[1];
+        }
+        else{
+            serverPort = 8888;
+            serverHost = "10.200.108.240";
+
+        }
+
 
         ClientCommand client = new ClientCommand(serverHost, serverPort);
 

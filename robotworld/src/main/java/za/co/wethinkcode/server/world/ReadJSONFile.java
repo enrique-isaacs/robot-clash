@@ -15,7 +15,7 @@ public class ReadJSONFile {
         try {
 // fix file path string
 //            Object obj = parser.parse(new FileReader("src/main/java/za/co/wethinkcode/server_side/world_configs.json"));
-            Object obj = parser.parse(new FileReader("robotworld/src/main/java/za/co/wethinkcode/server/world/world_configs.json"));
+            Object obj = parser.parse(new FileReader("src/main/java/za/co/wethinkcode/server/world/world_configs.json"));
             jsonObject = (JSONObject) obj;
         } catch (Exception e) {
             e.printStackTrace();
