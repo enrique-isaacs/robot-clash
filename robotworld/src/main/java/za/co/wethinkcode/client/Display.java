@@ -17,8 +17,8 @@ public class Display {
         String userName = null;
         try {
             ClientCommand client = new ClientCommand("localhost", 1999); // replace with your server host and port
-            JSONObject command = client.getCommand();
-            userName = command.getString("name");
+//            JSONObject command = client.getCommand();
+//            userName = command.getString("name");
             client.close();
         } catch (Exception e) {
             e.printStackTrace();

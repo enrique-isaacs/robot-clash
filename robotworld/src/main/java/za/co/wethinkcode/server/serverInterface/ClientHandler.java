@@ -15,6 +15,7 @@ import java.util.Scanner;
 class ClientHandler extends Thread {
     private Socket socket;
 
+
     public ClientHandler(Socket socket) {
         this.socket = socket;
     }
@@ -45,15 +46,14 @@ class ClientHandler extends Thread {
                 if (r.getCommand().equalsIgnoreCase("quit")) {
 
                     break;
-                } else if (r.getCommand().equalsIgnoreCase("dump")) {
-
                 }
 
-                Scanner scn = new Scanner(System.in);
-                System.out.print("Enter message for client: ");
-                String response = scn.nextLine();
-                outputStream.writeObject(response);
-                System.out.println("Sent message to client: " + response);
+
+//                Scanner scn = new Scanner(System.in);
+//                System.out.print("Enter message for client: ");
+//                String response = scn.nextLine();
+//                outputStream.writeObject(response);
+//                System.out.println("Sent message to client: " + response);
             }
 
             inputStream.close();
