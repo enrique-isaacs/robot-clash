@@ -1,16 +1,29 @@
-package za.co.wethinkcode.server.commands;
+package za.co.wethinkcode.server.commands.commands;
 
+import za.co.wethinkcode.server.commands.Command;
 import za.co.wethinkcode.server.robotLab.AbstractBot;
+import za.co.wethinkcode.server.serverInterface.ResponseBuilder;
 
 public class BackCommand extends Command {
     @Override
-    public boolean execute(AbstractBot target) {
+    public boolean execute(AbstractBot target, ResponseBuilder responseBuilder) {
         int nrSteps = Integer.parseInt(getArgument());
-//        if (target.updatePosition(-nrSteps) == target.UpdateResponse.SUCCESS){
-//            target.setStatus("Moved back by "+nrSteps+" steps.");
-//        } else {
-//            target.setStatus("Sorry, I cannot go outside my safe zone.");
-//        }
+        String updatePositionResult = target.updatePosition(-nrSteps);
+        switch (updatePositionResult.toUpperCase()) {
+            case "SUCCESS":
+                responseBuilder.setResponseStatus("OK");
+                responseBuilder.setDataMessage("Done");
+                break;
+            case "OBSTRUCTED":
+            case "FAILED_OUTSIDE_WORLD":
+                responseBuilder.setResponseStatus("ERROR");
+                responseBuilder.setErrorMessage("Obstructed");
+                break;
+            default:
+                // Handle any other cases here
+                break;
+        }
+
         return true;
     }
 
