@@ -1,9 +1,15 @@
 package za.co.wethinkcode.server.robotLab;
 
-import za.co.wethinkcode.server.world.Position;
+import za.co.wethinkcode.server.world.WORLD;
 
 public class SniperBot extends AbstractBot{
-    public SniperBot(String name, int visibilityX, int shieldsX, Position spawn) {
-        super(name, visibilityX, shieldsX,spawn);
+    public SniperBot(WORLD world, String name) {
+        super(world, name);
+        setType("sniper");
+    }
+
+    @Override
+    protected void setType(String make) {
+        this.model = make;
     }
 }

@@ -4,13 +4,16 @@ import za.co.wethinkcode.server.commands.Command;
 import za.co.wethinkcode.server.robotLab.AbstractBot;
 import za.co.wethinkcode.server.serverInterface.ResponseBuilder;
 
-public class LeftCommand extends Command {
+public class ErrorHandling extends Command {
+
+    public ErrorHandling() {
+        super("error");
+    }
+
     @Override
     public boolean execute(AbstractBot target, ResponseBuilder responseBuilder) {
-        target.updateDirection(false);
-        responseBuilder.setResponseStatus("OK");
-        responseBuilder.setDataMessage("Done");
+        responseBuilder.setResponseStatus("ERROR");
+        responseBuilder.setErrorMessage("Unsupported Command.");
         return true;
     }
-    public LeftCommand() {super("left");}
 }
