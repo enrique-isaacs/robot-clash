@@ -1,17 +1,17 @@
 package za.co.wethinkcode.server.commands;
 
-
 import za.co.wethinkcode.server.commands.Command;
 import za.co.wethinkcode.server.robotLab.AbstractBot;
 import za.co.wethinkcode.server.serverInterface.ResponseBuilder;
 
-public class RightCommand extends Command {
+public class RobotQuitCommand extends Command {
+
+    public RobotQuitCommand() {
+        super("quit");
+    }
+
     @Override
     public boolean execute(AbstractBot target, ResponseBuilder responseBuilder) {
-        target.updateDirection(true);
-        responseBuilder.setResponseStatus("OK");
-        responseBuilder.setDataMessage("Done");
-        return true;
+        return false;
     }
-    public RightCommand() {super("right");}
 }

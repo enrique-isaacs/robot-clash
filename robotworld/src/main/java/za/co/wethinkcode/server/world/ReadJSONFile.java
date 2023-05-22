@@ -1,29 +1,49 @@
 package za.co.wethinkcode.server.world;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.FileReader;
+import java.io.Reader;
 
-// add org json to pom file
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
+/**
+ * Utility class for reading JSON configuration files.
+ */
 public class ReadJSONFile {
 
-    private static JSONObject jsonObject;
+    private static JsonObject jsonObject;
 
     static {
-        JSONParser parser = new JSONParser();
         try {
-// fix file path string
-//            Object obj = parser.parse(new FileReader("src/main/java/za/co/wethinkcode/server_side/world_configs.json"));
-            Object obj = parser.parse(new FileReader("src/main/java/za/co/wethinkcode/server/world/world_configs.json"));
-            jsonObject = (JSONObject) obj;
+            Reader reader = new FileReader("dummyWorld/robotworld/src/main/java/za/co/wethinkcode/server/world/world_configs.json");
+
+            jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+
+            reader.close();
+
         } catch (Exception e) {
-            e.printStackTrace();
+            // In case the file is not found or there's an error, use default values
+            String jsonThing = "{\n" +
+                    "\t\"height\": 400,\n" +
+                    "\t\"width\" : 200,\n" +
+                    "\t\"visibility\" : 5,\n" +
+                    "\t\"shields\" : 5,\n" +
+                    "\t\"repair\" : 5,\n" +
+                    "\t\"reload\" : 5,\n" +
+                    "\t\"firingDistance\" : 10,\n" +
+                    "\t\"shots\" : 5\n" +
+                    "}";
+            jsonObject = JsonParser.parseString(jsonThing).getAsJsonObject();
         }
     }
 
-    public static String get(String key) {
-        return jsonObject.get(key).toString();
+    /**
+     * Retrieves the value associated with the given key from the JSON configuration file.
+     *
+     * @param key the key to retrieve the value for
+     * @return the integer value associated with the key
+     */
+    public static int get(String key) {
+        return Integer.parseInt(jsonObject.get(key).getAsString());
     }
-
 }
