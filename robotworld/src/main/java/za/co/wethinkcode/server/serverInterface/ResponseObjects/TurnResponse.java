@@ -12,15 +12,12 @@ public class TurnResponse extends ResponseBuilder{
 
     public JsonObject buildResponseMessage(String name){
 
-        if(getResponseStatus().equals("OK")){
-            this.responseMessage.put("result", getResponseStatus());
-            this.responseMessage.put("data", buildDataMessage());
-            this.responseMessage.put("state", this.world.getBot(name).getState());
-        }
-        else if(getResponseStatus().equals("ERROR")){
-            this.responseMessage.put("result", getResponseStatus());
-            this.responseMessage.put("data", getErrorMessage());
-        }
+
+        this.responseMessage.put("result", getResponseStatus());
+        this.responseMessage.put("data", buildDataMessage());
+        this.responseMessage.put("state", this.world.getBot(name).getState());
+        
+
         // if statements wont be necessary for turn ..
 
 

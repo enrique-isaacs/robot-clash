@@ -1,4 +1,4 @@
-package za.co.wethinkcode.server.commands.commands;
+package za.co.wethinkcode.server.commands;
 
 import za.co.wethinkcode.server.commands.Command;
 import za.co.wethinkcode.server.robotLab.AbstractBot;

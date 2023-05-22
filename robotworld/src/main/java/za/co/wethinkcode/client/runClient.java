@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import za.co.wethinkcode.server.world.ReadJSONFile;
+// import za.co.wethinkcode.server.world.ReadJSONFile;
 
 public class runClient {
-    private static String SERVER_IP = ""; // Store the server IP address
-    private static int SERVER_PORT = 0; // Store the server port number
+    private static String SERVER_IP = "192.168.18.6"; // Store the server IP address
+    private static int SERVER_PORT = 8080; // Store the server port number
     private static String playerName = ""; // Store the player name
 
     /**

@@ -60,7 +60,6 @@ public class WorldCommands extends Thread {
      */
     private void stopServer() {
         try {
-            Server.serverIsRunning = false;
 
             sleep(1);
             socket.close();

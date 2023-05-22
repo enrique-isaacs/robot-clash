@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import com.google.gson.*;
-import za.co.wethinkcode.server.commands.ShutdownCommand;
+// import za.co.wethinkcode.server.commands.ShutdownCommand;
 
 public abstract class ResponseHandler {
 
