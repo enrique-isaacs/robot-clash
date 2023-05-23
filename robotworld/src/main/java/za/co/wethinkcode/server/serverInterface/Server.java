@@ -36,12 +36,19 @@ public class Server {
         WorldCommands consoleCommands = new WorldCommands(this.world, serverSocket);
         consoleCommands.start();
 
-        while (true) {
-            Socket socket = serverSocket.accept();
-            System.out.println("Client connected: " + socket);
 
-            ClientHandler clientHandler = new ClientHandler(socket, this.world);
-            clientHandler.start();
+        try{
+            while(true){
+                Socket socket = serverSocket.accept();
+                ClientHandler clientHandler = new ClientHandler(socket, this.world);
+                clientHandler.start();
+            }
         }
+        catch(Exception e){
+            System.out.println("System shutting down");
+            System.exit(0);
+
+        }
+
     }
 }

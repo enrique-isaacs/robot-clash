@@ -32,7 +32,7 @@ public class ForwardResponse extends ResponseBuilder {
             this.responseMessage.put("state", this.world.getBot(name).getState());
         } else if (getResponseStatus().equals("ERROR")) {
             this.responseMessage.put("result", getResponseStatus());
-            this.responseMessage.put("data", getErrorMessage());
+            this.responseMessage.put("data", buildErrorMessage());
         }
 
         return gson.fromJson(gson.toJsonTree(this.responseMessage), JsonObject.class);

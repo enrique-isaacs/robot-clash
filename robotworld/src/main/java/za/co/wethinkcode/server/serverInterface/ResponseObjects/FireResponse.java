@@ -87,6 +87,7 @@ public class FireResponse extends ResponseBuilder {
      * @return The data map representing the response data.
      */
     private Map<String, Object> buildDataMap(String name) {
+
         this.dataMap.put("message", getDataMessage());
         this.dataMap.put("distance", getFireDistance());
         this.dataMap.put("robot", getRobotHitName());
@@ -108,7 +109,7 @@ public class FireResponse extends ResponseBuilder {
             this.responseMessage.put("state", this.world.getBot(name).getState());
         } else if (getDataMessage().equals("Miss")) {
             this.responseMessage.put("result", getResponseStatus());
-            this.responseMessage.put("data", getDataMessage());
+            this.responseMessage.put("data", buildDataMessage());
             this.responseMessage.put("state", this.world.getBot(name).getState());
         }
 

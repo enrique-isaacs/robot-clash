@@ -36,7 +36,7 @@ public class WORLD {
 
         this.maze = new DefaultMaze();
         this.listOfObstacles = this.maze.getObstacles();
-        robotMap = new HashMap<>();
+        this.robotMap = new LinkedHashMap<>();
         random = new Random();
         robotPositions = new ArrayList<>();
         robotPositionsAsObstaclesArray = new ArrayList<>();
@@ -76,6 +76,19 @@ public class WORLD {
         }
         return this.robotPositions;
     }
+
+    public ArrayList<Position> getCurrentRobotPositionsList(){
+        // Gets most recent positions of all robots
+
+        this.robotPositions.clear();
+        for(AbstractBot bot : this.robotMap.values()){
+            this.robotPositions.add(bot.getCurrentPosition());
+        }
+
+        return this.robotPositions;
+    }
+
+
 
     private ArrayList<Position> getRobotPositions() {
         this.robotPositions = setRobotPositionList();
@@ -144,6 +157,10 @@ public class WORLD {
         return listOfRobots;
     }
 
+    public LinkedHashMap<String, AbstractBot> getMapOfRobots(){
+        return (LinkedHashMap<String, AbstractBot>) this.robotMap;
+    }
+
     private ArrayList<Obstacle> getRobotPositionsAsObstacles() {
         // Convert robot positions to obstacles and store them in an array
         for (AbstractBot bot : getListOfRobots()) {
@@ -191,29 +208,29 @@ public class WORLD {
         return obstructed;
     }
 
-    public AbstractBot robotInFireRange(Position bulletPosition) {
-        // Check if a robot is in the firing range of the specified bullet position
-        int index = 0;
-        for (Obstacle robotPositionAsObstacle : getRobotPositionsAsObstacles()) {
-            if (robotPositionAsObstacle.blocksPosition(bulletPosition)) {
-                System.out.println("up index:" +index);
-                break;
-            }
-
-            index++;
-        }
-        ArrayList<AbstractBot> botsHit = new ArrayList<>();
-        for (AbstractBot bot : this.robotMap.values()) {
-            System.out.println("index: " + index);
-            System.out.println("size" + getRobotPositions().size());
-            if (bot.getCurrentPosition().equals(getRobotPositions().get(index))) {
-                botsHit.add(bot);
-                break;
-            }
-        }
-
-        return botsHit.get(0);
-    }
+//    public AbstractBot robotInFireRange(Position bulletPosition) {
+//        // Check if a robot is in the firing range of the specified bullet position
+//        int index = 0;
+//        for (Obstacle robotPositionAsObstacle : getRobotPositionsAsObstacles()) {
+//            if (robotPositionAsObstacle.blocksPosition(bulletPosition)) {
+//                System.out.println("up index:" +index);
+//                break;
+//            }
+//
+//            index++;
+//        }
+//        ArrayList<AbstractBot> botsHit = new ArrayList<>();
+//        for (AbstractBot bot : this.robotMap.values()) {
+//            System.out.println("index: " + index);
+//            System.out.println("size" + getRobotPositions().size());
+//            if (bot.getCurrentPosition().equals(getRobotPositions().get(index))) {
+//                botsHit.add(bot);
+//                break;
+//            }
+//        }
+//
+//        return botsHit.get(0);
+//    }
 
     private boolean spawnPointObstructedByObstacle(Position botSpawnPoint) {
         // Check if the specified bot spawn point is obstructed by an obstacle
