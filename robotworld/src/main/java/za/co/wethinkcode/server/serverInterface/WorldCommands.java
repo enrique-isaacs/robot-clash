@@ -8,7 +8,6 @@ import java.net.ServerSocket;
 
 import za.co.wethinkcode.server.robotLab.AbstractBot;
 import za.co.wethinkcode.server.world.Obstacle;
-import za.co.wethinkcode.server.world.Position;
 import za.co.wethinkcode.server.world.WORLD;
 
 /**

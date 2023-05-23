@@ -146,7 +146,7 @@ public class ClientCommand {
         }
         else{
             serverPort = 8888;
-            serverHost = "10.200.108.240";
+            serverHost = "10.200.108.172";
 
         }
 

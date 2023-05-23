@@ -36,7 +36,7 @@ class DefaultMazeTest {
         Obstacle obstacle = obstacles.get(0);
 
         assertTrue(obstacle instanceof SquareObstacle);
-        assertEquals(0, obstacle.getBottomLeftX());
-        assertEquals(0, obstacle.getBottomLeftY());
+        assertEquals(1, obstacle.getBottomLeftX());
+        assertEquals(1, obstacle.getBottomLeftY());
     }
 }

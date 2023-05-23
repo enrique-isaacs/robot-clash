@@ -2,16 +2,27 @@ package za.co.wethinkcode.server.world;
 
 import za.co.wethinkcode.server.world.Position;
 
-public class SquareObstacle implements Obstacle{
+/**
+ * The SquareObstacle class represents a square-shaped obstacle in the game world.
+ * It implements the Obstacle interface.
+ */
+public class SquareObstacle implements Obstacle {
 
-    int x,y,size;
-    public SquareObstacle(int x, int y){
+    private int x;
+    private int y;
+    private int size;
+
+    /**
+     * Constructs a SquareObstacle object with the specified bottom left coordinates.
+     *
+     * @param x The x coordinate of the bottom left corner.
+     * @param y The y coordinate of the bottom left corner.
+     */
+    public SquareObstacle(int x, int y) {
         this.x = x;
         this.y = y;
         this.size = 5;
-
     }
-
 
     @Override
     public int getBottomLeftX() {
@@ -30,10 +41,9 @@ public class SquareObstacle implements Obstacle{
 
     @Override
     public boolean blocksPosition(Position position) {
-        boolean inRangeOfX = this.x <= position.getX() && position.getX() <= this.x+getSize()-1;
-        boolean inRangeOfY = this.y <= position.getY() && position.getY() <= this.y+getSize()-1;
+        boolean inRangeOfX = this.x <= position.getX() && position.getX() <= this.x + getSize() - 1;
+        boolean inRangeOfY = this.y <= position.getY() && position.getY() <= this.y + getSize() - 1;
         return inRangeOfX && inRangeOfY;
-
     }
 
     @Override
@@ -46,6 +56,15 @@ public class SquareObstacle implements Obstacle{
         return isPathBlocked(x1, y1, x2, y2);
     }
 
+    /**
+     * Checks if the path between two positions is blocked by the obstacle.
+     *
+     * @param x1 The x coordinate of the first position.
+     * @param y1 The y coordinate of the first position.
+     * @param x2 The x coordinate of the second position.
+     * @param y2 The y coordinate of the second position.
+     * @return `true` if the path is blocked, `false` otherwise.
+     */
     public boolean isPathBlocked(int x1, int y1, int x2, int y2) {
         boolean pathBlocked = false;
 
@@ -66,8 +85,5 @@ public class SquareObstacle implements Obstacle{
         }
 
         return pathBlocked;
-
     }
-
 }
-
