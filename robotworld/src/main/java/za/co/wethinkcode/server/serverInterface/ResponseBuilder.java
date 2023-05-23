@@ -86,7 +86,7 @@ public class ResponseBuilder {
      * @return the data message
      */
     public synchronized String getDataMessage() {
-        return dataMessage;
+        return this.dataMessage;
     }
 
     /**
@@ -95,6 +95,11 @@ public class ResponseBuilder {
      */
     public synchronized Map<String, String> buildDataMessage(){
         this.dataMessageMap.put("message", getDataMessage());
+        return dataMessageMap;
+    }
+
+    public synchronized Map<String, String> buildErrorMessage(){
+        this.dataMessageMap.put("message", getErrorMessage());
         return dataMessageMap;
     }
 

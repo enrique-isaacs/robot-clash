@@ -61,10 +61,10 @@ public abstract class AbstractBot{
     protected abstract void setType(String make);
 
     public void takeHit(){
-        setShields(getShields()-1);
         if(getShields() == 0){
             this.status = "DEAD";
         }
+        setShields(getShields()-1);
     }
 
     public String getModel(){
@@ -205,6 +205,12 @@ public abstract class AbstractBot{
                 default:
                     break;
             }
+        }
+    }
+
+    public void reduceShots(int num){
+        if(getShots() != 0){
+            this.shots = getShots() - num;
         }
     }
 
