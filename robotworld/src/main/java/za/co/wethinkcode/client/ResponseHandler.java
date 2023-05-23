@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import com.google.gson.*;
-// import za.co.wethinkcode.server.commands.ShutdownCommand;
 
 public abstract class ResponseHandler {
 
@@ -37,8 +36,6 @@ public abstract class ResponseHandler {
                    return new BackResult(this.inputStream, this.userCommand);
                 case "turn":
                     return new TurnResult(this.inputStream, this.userCommand);
-//                case "right":
-//                    return new BackResult(this.inputStream, this.userCommand);
             }
         } // else return error object
         return new ForwardResult(this.inputStream, this.userCommand);

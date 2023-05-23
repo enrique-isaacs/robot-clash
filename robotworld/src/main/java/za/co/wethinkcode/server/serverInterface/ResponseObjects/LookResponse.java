@@ -4,26 +4,33 @@ import com.google.gson.JsonObject;
 import za.co.wethinkcode.server.serverInterface.ResponseBuilder;
 import za.co.wethinkcode.server.world.WORLD;
 
-//yo quick thing, can you leave the lookResponse blank for now.. while i work on the look command.. cos you will need to get some data
-//from the robot in order to build this response
-//
-//??okay
-
 import java.util.Map;
 
+/**
+ * The LookResponse class represents a response builder for the look action.
+ * It builds the response message indicating the result of a look action.
+ */
 public class LookResponse extends ResponseBuilder {
 
+    /**
+     * Constructs a LookResponse instance with the specified world.
+     *
+     * @param world The WORLD instance representing the game world.
+     */
     public LookResponse(WORLD world) {
         super(world);
     }
 
-    private Map<String, Object> buildDataMap(String name){
-
-        System.out.println(name);
-
+    /**
+     * Builds the data map for the look action.
+     *
+     * @param name The name of the player.
+     * @return The map containing the data for the look action.
+     */
+    private Map<String, Object> buildDataMap(String name) {
         int x = this.world.getBot(name).getCurrentPosition().getX();
         int y = this.world.getBot(name).getCurrentPosition().getY();
-        Integer[] robotPosition = new Integer[]{x,y};
+        Integer[] robotPosition = new Integer[]{x, y};
         int robotVisibility = this.world.getBot(name).getVisibility();
         int robotReloadTime = this.world.getBot(name).getReload();
         int robotRepairTime = this.world.getBot(name).getRepair();
@@ -36,25 +43,24 @@ public class LookResponse extends ResponseBuilder {
         this.dataMap.put("shields", robotShieldStrength);
 
         return this.dataMap;
-
     }
 
-    public JsonObject buildResponseMessage(String name){
-
-        if(getResponseStatus().equals("OK")){
+    /**
+     * Builds the response message for the look action.
+     *
+     * @param name The name of the player.
+     * @return The JsonObject representing the response message.
+     */
+    public JsonObject buildResponseMessage(String name) {
+        if (getResponseStatus().equals("OK")) {
             this.responseMessage.put("result", getResponseStatus());
             this.responseMessage.put("data", buildDataMap(name));
             this.responseMessage.put("state", this.world.getBot(name).getState());
-        }
-        else if(getResponseStatus().equals("ERROR")){
+        } else if (getResponseStatus().equals("ERROR")) {
             this.responseMessage.put("result", getResponseStatus());
             this.responseMessage.put("data", getErrorMessage());
         }
 
-
         return gson.fromJson(gson.toJsonTree(this.responseMessage), JsonObject.class);
-
     }
-
-
 }
