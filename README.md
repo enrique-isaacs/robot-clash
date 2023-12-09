@@ -3,7 +3,7 @@
 ## Project description
 
 --
-RobotWorlds is a Server/Client program written in java using openjdk 11.0.16 2022-07-19 LTS. Players can connect to a server which hosts a virtual world for their robots to join. The program allows clients to interact with one another by providing features such as launching different models of robots into the world, moving around, firing weapons and defending with shields. The server allows concurrent connection for multiple clients, using a multi-threaded approach, making sure each client gets their appropriate information. 
+RobotWorlds is a Server/Client program written in java. Players can connect to a server which hosts a virtual world for their robots to join. The program allows clients to interact with one another by providing features such as launching different models of robots into the world, moving around, firing weapons and defending with shields. The server allows concurrent connection for multiple clients, using a multi-threaded approach, making sure each client gets their appropriate information.
 --
 
 ## Features
@@ -69,15 +69,5 @@ For the client-side, you are able to run it with command-line arguments. For exa
 `onmaenz022@student.wethinkcode.co.za`
 --
 
-## Tools
-
--- 
-IntelliJ IDEA
-Apache Maven 3.9.0
-openjdk 11.0.16 2022-07-19 LTS
-OpenAI. "ChatGPT: Language Model developed by OpenAI."
-JUnit
-Gson
---
 
 *Thank you*
